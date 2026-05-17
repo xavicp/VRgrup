@@ -2272,7 +2272,7 @@ MonoBehaviour:
   prefabCubo: {fileID: 4897443094411536400, guid: 95e6a320fc6578946946f107c60c9ff5, type: 3}
   prefabEsfera: {fileID: 4467618498139534846, guid: 9052c79e03f7f4b48a58ed16b1b9b7cb, type: 3}
   tiempoEntreLanzamientos: 2
-  fuerzaLanzamiento: 5
+  fuerzaLanzamiento: 10
 --- !u!4 &571591039
 Transform:
   m_ObjectHideFlags: 0
