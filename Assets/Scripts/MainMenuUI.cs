@@ -20,7 +20,6 @@ public class MainMenuUI : MonoBehaviour
     public void StartGameplay()
     {
         warningPanel.SetActive(false);
-        gameplayHUD.SetActive(true);
     }
 
     // BOTÓN INSTRUCCIONES
