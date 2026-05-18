@@ -3325,8 +3325,8 @@ MonoBehaviour:
   - {fileID: 600439520}
   - {fileID: 1769682362}
   jugador: {fileID: 1747129932}
-  prefabCubo: {fileID: 4897443094411536400, guid: 95e6a320fc6578946946f107c60c9ff5, type: 3}
-  prefabEsfera: {fileID: 4467618498139534846, guid: 9052c79e03f7f4b48a58ed16b1b9b7cb, type: 3}
+  prefabCubo: {fileID: 1396327359903034324, guid: 035810c4b7b86ea44909399b59ff0b03, type: 3}
+  prefabEsfera: {fileID: 8732821005063135858, guid: df84160dc5fb23c47b64edfa9c740bf7, type: 3}
   tiempoEntreLanzamientos: 2
   fuerzaLanzamiento: 25
   vidaMaxima: 100
