@@ -21,7 +21,7 @@ public class DetectorColision : MonoBehaviour
         }
 
         // Si este script está en el jugador (cabeza) y le choca una Esfera
-        if (gameObject.CompareTag("MainCamera") && collision.gameObject.CompareTag("Esfera"))
+        if (gameObject.CompareTag("Player") && collision.gameObject.CompareTag("Esfera"))
         {
             controlador.RestarVida();
             Destroy(collision.gameObject); // Destruye la esfera para que no golpee dos veces
