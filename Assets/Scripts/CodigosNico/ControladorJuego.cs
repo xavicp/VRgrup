@@ -8,7 +8,6 @@ public class ControladorJuego : MonoBehaviour
     public Transform[] puntosLanzamiento;
     public Transform jugador;
 
-    public GameObject prefabCubo;
     public GameObject prefabEsfera;
 
     public float tiempoEntreLanzamientos = 2f;
@@ -58,11 +57,8 @@ public class ControladorJuego : MonoBehaviour
             int indicePlano = Random.Range(0, puntosLanzamiento.Length);
             Transform lanzadorElegido = puntosLanzamiento[indicePlano];
 
-            GameObject objetoAVisualizar =
-                (Random.Range(0, 2) == 0) ? prefabCubo : prefabEsfera;
-
             GameObject objetoClonado = Instantiate(
-                objetoAVisualizar,
+                prefabEsfera,
                 lanzadorElegido.position,
                 Quaternion.identity
             );
