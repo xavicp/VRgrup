@@ -8,7 +8,7 @@ public class RotarHaciaJugador : MonoBehaviour
     void Start()
     {
         // Buscamos en la escena el objeto que tenga la etiqueta "Player" (tu cámara)
-        GameObject jugador = GameObject.FindGameObjectWithTag("Player");
+        GameObject jugador = Camera.main.gameObject;
 
         if (jugador != null)
         {

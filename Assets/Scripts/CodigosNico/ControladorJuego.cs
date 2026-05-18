@@ -4,24 +4,23 @@ using UnityEngine;
 
 public class ControladorJuego : MonoBehaviour
 {
-    [Header("Configuración de Lanzamiento")]
+    [Header("Configuraciï¿½n de Lanzamiento")]
     public Transform[] puntosLanzamiento;
+    public Transform jugador;
+
     public GameObject prefabCubo;
     public GameObject prefabEsfera;
 
     public float tiempoEntreLanzamientos = 2f;
     public float fuerzaLanzamiento = 5f;
 
-    [Header("Jugador")]
-    public Transform jugador;
+    [Header("Estadï¿½sticas de Jugador")]
+    public int vidaMaxima = 100;
 
-    [Header("Desviación del disparo")]
-    public float desviacionHorizontal = 1.5f;
-    public float desviacionVertical = 1f;
+    private int vida;
+    private int puntos;
+    private float tiempoPartida;
 
-    [Header("Estadísticas de Jugador")]
-    private int vida = 100;
-    private int puntos = 0;
     private bool juegoTerminado = false;
 
     private int record = 0;
@@ -33,11 +32,21 @@ public class ControladorJuego : MonoBehaviour
 
     public void EmpezarJuego()
     {
-        vida = 100;
+        vida = vidaMaxima;
         puntos = 0;
+        tiempoPartida = 0f;
+
         juegoTerminado = false;
 
         StartCoroutine(RutinaLanzamiento());
+    }
+
+    void Update()
+    {
+        if (!juegoTerminado)
+        {
+            tiempoPartida += Time.deltaTime;
+        }
     }
 
     IEnumerator RutinaLanzamiento()
@@ -64,13 +73,10 @@ public class ControladorJuego : MonoBehaviour
 
             if (rb != null && jugador != null)
             {
-                Vector3 objetivo = jugador.position;
-
-                objetivo.x += Random.Range(-desviacionHorizontal, desviacionHorizontal);
-                objetivo.y += Random.Range(-desviacionVertical, desviacionVertical);
-
                 Vector3 direccion =
-                    (objetivo - lanzadorElegido.position).normalized;
+                    (jugador.position - lanzadorElegido.position).normalized;
+
+                Debug.Log("Vector de disparo: " + direccion);
 
                 rb.AddForce(direccion * fuerzaLanzamiento, ForceMode.Impulse);
             }
@@ -85,29 +91,24 @@ public class ControladorJuego : MonoBehaviour
 
         puntos += 10;
 
-        if (puntos > record)
-        {
-            record = puntos;
-        }
-
-        Debug.Log("¡Cubo golpeado! Puntos: " + puntos);
-        Debug.Log("Récord actual: " + record);
+        Debug.Log("Puntos: " + puntos);
     }
 
     public void RestarVida()
     {
         if (juegoTerminado) return;
 
-        vida -= 25;
+        vida -= 10;
 
-        Debug.Log("¡Te ha dado una esfera! Vida restante: " + vida);
+        Debug.Log("Vida restante: " + vida);
 
         if (vida <= 0)
         {
             juegoTerminado = true;
 
-            Debug.Log("GAME OVER. Puntos totales: " + puntos);
-            Debug.Log("Récord máximo: " + record);
+            Debug.Log("GAME OVER");
+            Debug.Log("Puntos finales: " + puntos);
+            Debug.Log("Tiempo sobrevivido: " + tiempoPartida);
         }
     }
 }
