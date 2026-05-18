@@ -996,7 +996,7 @@ Transform:
   m_GameObject: {fileID: 225887657}
   serializedVersion: 2
   m_LocalRotation: {x: -0.6372134, y: -0.25137177, z: -0.23192665, w: 0.6906384}
-  m_LocalPosition: {x: -4, y: 2, z: 1.425}
+  m_LocalPosition: {x: -4.41, y: 1.95, z: 1.93}
   m_LocalScale: {x: 0.3, y: 0.1, z: 0.3}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2362,7 +2362,7 @@ Transform:
   m_GameObject: {fileID: 515219657}
   serializedVersion: 2
   m_LocalRotation: {x: -0.6372134, y: 0.25137177, z: 0.23192665, w: 0.6906384}
-  m_LocalPosition: {x: 4, y: 2, z: 1.425}
+  m_LocalPosition: {x: 4.731, y: 1.908, z: 2.296}
   m_LocalScale: {x: 0.3, y: 0.1, z: 0.3}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3200,6 +3200,9 @@ MonoBehaviour:
   prefabEsfera: {fileID: 4467618498139534846, guid: 9052c79e03f7f4b48a58ed16b1b9b7cb, type: 3}
   tiempoEntreLanzamientos: 2
   fuerzaLanzamiento: 10
+  jugador: {fileID: 1747129932}
+  desviacionHorizontal: 1.5
+  desviacionVertical: 1
 --- !u!4 &571591039
 Transform:
   m_ObjectHideFlags: 0
@@ -6005,6 +6008,11 @@ Camera:
   m_CorrespondingSourceObject: {fileID: 6484816944661230508, guid: 86a5bf68cb51f4e44bd3893bd22a2ba7, type: 3}
   m_PrefabInstance: {fileID: 1766750150}
   m_PrefabAsset: {fileID: 0}
+--- !u!4 &1747129932 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6484816944661230505, guid: 86a5bf68cb51f4e44bd3893bd22a2ba7, type: 3}
+  m_PrefabInstance: {fileID: 1766750150}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1766750150
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6769,7 +6777,7 @@ Transform:
   m_GameObject: {fileID: 1818951616}
   serializedVersion: 2
   m_LocalRotation: {x: -0.67810595, y: -0, z: -0, w: 0.73496425}
-  m_LocalPosition: {x: 0, y: 2, z: 2.425}
+  m_LocalPosition: {x: 0, y: 1.82, z: 4.68}
   m_LocalScale: {x: 0.3, y: 0.1, z: 0.3}
   m_ConstrainProportionsScale: 0
   m_Children: []

@@ -5,20 +5,38 @@ using UnityEngine;
 public class ControladorJuego : MonoBehaviour
 {
     [Header("Configuración de Lanzamiento")]
-    public Transform[] puntosLanzamiento; // Aquí arrastraremos los 3 planos
+    public Transform[] puntosLanzamiento;
     public GameObject prefabCubo;
     public GameObject prefabEsfera;
+
     public float tiempoEntreLanzamientos = 2f;
-    public float fuerzaLanzamiento = 5f; // Fuerza para empujar el objeto hacia el jugador
+    public float fuerzaLanzamiento = 5f;
+
+    [Header("Jugador")]
+    public Transform jugador;
+
+    [Header("Desviación del disparo")]
+    public float desviacionHorizontal = 1.5f;
+    public float desviacionVertical = 1f;
 
     [Header("Estadísticas de Jugador")]
     private int vida = 100;
     private int puntos = 0;
     private bool juegoTerminado = false;
 
+    private int record = 0;
+
     void Start()
     {
-        // Empezamos a lanzar objetos repetidamente
+
+    }
+
+    public void EmpezarJuego()
+    {
+        vida = 100;
+        puntos = 0;
+        juegoTerminado = false;
+
         StartCoroutine(RutinaLanzamiento());
     }
 
@@ -30,27 +48,33 @@ public class ControladorJuego : MonoBehaviour
 
             if (juegoTerminado) break;
 
-            // 1. Elegir un plano aleatorio de los 3
             int indicePlano = Random.Range(0, puntosLanzamiento.Length);
-            Transform planoElegido = puntosLanzamiento[indicePlano];
+            Transform lanzadorElegido = puntosLanzamiento[indicePlano];
 
-            // 2. Elegir aleatoriamente si sale Cubo (0) o Esfera (1)
-            GameObject objetoAVisualizar = (Random.Range(0, 2) == 0) ? prefabCubo : prefabEsfera;
+            GameObject objetoAVisualizar =
+                (Random.Range(0, 2) == 0) ? prefabCubo : prefabEsfera;
 
-            // 3. Crear el objeto en la posición del plano
-            GameObject objetoClonado = Instantiate(objetoAVisualizar, planoElegido.position, Quaternion.identity);
+            GameObject objetoClonado = Instantiate(
+                objetoAVisualizar,
+                lanzadorElegido.position,
+                Quaternion.identity
+            );
 
-            // 4. Empujar el objeto hacia adelante (dirección al jugador)
             Rigidbody rb = objetoClonado.GetComponent<Rigidbody>();
-            if (rb != null)
+
+            if (rb != null && jugador != null)
             {
-                // Lanzar en dirección opuesta al eje Z del plano (hacia el jugador)
-                //rb.AddForce(Vector3.back * fuerzaLanzamiento, ForceMode.Impulse);
-                // 'forward' es la dirección hacia donde está mirando el plano en ese instante
-                rb.AddForce(planoElegido.forward * fuerzaLanzamiento, ForceMode.Impulse);
+                Vector3 objetivo = jugador.position;
+
+                objetivo.x += Random.Range(-desviacionHorizontal, desviacionHorizontal);
+                objetivo.y += Random.Range(-desviacionVertical, desviacionVertical);
+
+                Vector3 direccion =
+                    (objetivo - lanzadorElegido.position).normalized;
+
+                rb.AddForce(direccion * fuerzaLanzamiento, ForceMode.Impulse);
             }
 
-            // Destruir el objeto automáticamente a los 5 segundos si no toca nada para que no sature el juego
             Destroy(objetoClonado, 5f);
         }
     }
@@ -58,20 +82,32 @@ public class ControladorJuego : MonoBehaviour
     public void SumarPuntos()
     {
         if (juegoTerminado) return;
+
         puntos += 10;
+
+        if (puntos > record)
+        {
+            record = puntos;
+        }
+
         Debug.Log("¡Cubo golpeado! Puntos: " + puntos);
+        Debug.Log("Récord actual: " + record);
     }
 
     public void RestarVida()
     {
         if (juegoTerminado) return;
-        vida -= 10;
+
+        vida -= 25;
+
         Debug.Log("¡Te ha dado una esfera! Vida restante: " + vida);
 
         if (vida <= 0)
         {
             juegoTerminado = true;
-            Debug.Log("GAME OVER. Te has quedado sin vida. Puntos totales: " + puntos);
+
+            Debug.Log("GAME OVER. Puntos totales: " + puntos);
+            Debug.Log("Récord máximo: " + record);
         }
     }
 }
