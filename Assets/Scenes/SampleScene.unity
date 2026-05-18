@@ -3196,10 +3196,12 @@ MonoBehaviour:
   - {fileID: 1818951617}
   - {fileID: 225887658}
   - {fileID: 515219658}
+  jugador: {fileID: 1747129932}
   prefabCubo: {fileID: 4897443094411536400, guid: 95e6a320fc6578946946f107c60c9ff5, type: 3}
   prefabEsfera: {fileID: 4467618498139534846, guid: 9052c79e03f7f4b48a58ed16b1b9b7cb, type: 3}
   tiempoEntreLanzamientos: 2
   fuerzaLanzamiento: 10
+  vidaMaxima: 100
 --- !u!4 &571591039
 Transform:
   m_ObjectHideFlags: 0
@@ -3752,6 +3754,18 @@ MonoBehaviour:
       - m_Target: {fileID: 409568791}
         m_TargetAssemblyTypeName: MainMenuUI, Assembly-CSharp
         m_MethodName: StartGameplay
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 571591038}
+        m_TargetAssemblyTypeName: ControladorJuego, Assembly-CSharp
+        m_MethodName: EmpezarJuego
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -6005,6 +6019,11 @@ Camera:
   m_CorrespondingSourceObject: {fileID: 6484816944661230508, guid: 86a5bf68cb51f4e44bd3893bd22a2ba7, type: 3}
   m_PrefabInstance: {fileID: 1766750150}
   m_PrefabAsset: {fileID: 0}
+--- !u!4 &1747129932 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6484816944661230505, guid: 86a5bf68cb51f4e44bd3893bd22a2ba7, type: 3}
+  m_PrefabInstance: {fileID: 1766750150}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1766750150
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6071,7 +6090,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6484816944661230506, guid: 86a5bf68cb51f4e44bd3893bd22a2ba7, type: 3}
       propertyPath: m_TagString
-      value: Player
+      value: MainCamera
       objectReference: {fileID: 0}
     - target: {fileID: 6484816944748581675, guid: 86a5bf68cb51f4e44bd3893bd22a2ba7, type: 3}
       propertyPath: m_TagString
