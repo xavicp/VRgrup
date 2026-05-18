@@ -3325,7 +3325,6 @@ MonoBehaviour:
   - {fileID: 600439520}
   - {fileID: 1769682362}
   jugador: {fileID: 1747129932}
-  prefabCubo: {fileID: 1396327359903034324, guid: 035810c4b7b86ea44909399b59ff0b03, type: 3}
   prefabEsfera: {fileID: 8732821005063135858, guid: df84160dc5fb23c47b64edfa9c740bf7, type: 3}
   tiempoEntreLanzamientos: 2
   fuerzaLanzamiento: 25
@@ -6706,7 +6705,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6484816944661230506, guid: 86a5bf68cb51f4e44bd3893bd22a2ba7, type: 3}
       propertyPath: m_TagString
-      value: MainCamera
+      value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 6484816944748581675, guid: 86a5bf68cb51f4e44bd3893bd22a2ba7, type: 3}
       propertyPath: m_TagString
