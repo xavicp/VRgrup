@@ -3328,7 +3328,7 @@ MonoBehaviour:
   prefabEsfera: {fileID: 8732821005063135858, guid: df84160dc5fb23c47b64edfa9c740bf7, type: 3}
   tiempoEntreLanzamientos: 2
   fuerzaLanzamiento: 25
-  vidaMaxima: 100
+  vidaMaxima: 3
 --- !u!4 &571591039
 Transform:
   m_ObjectHideFlags: 0

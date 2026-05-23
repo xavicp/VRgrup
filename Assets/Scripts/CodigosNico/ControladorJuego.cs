@@ -14,7 +14,7 @@ public class ControladorJuego : MonoBehaviour
     public float fuerzaLanzamiento = 5f;
 
     [Header("Estadísticas de Jugador")]
-    public int vidaMaxima = 100;
+    public int vidaMaxima = 3;
 
     private int vida;
     private int puntos;
@@ -92,9 +92,9 @@ public class ControladorJuego : MonoBehaviour
     {
         if (juegoTerminado) return;
 
-        vida -= 10;
+        vida -= 1;
 
-        Debug.Log("Vida restante: " + vida);
+        Debug.Log("Vidas restantes: " + vida);
 
         if (vida <= 0)
         {
