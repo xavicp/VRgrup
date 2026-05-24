@@ -11,7 +11,10 @@ public class ControladorJuego : MonoBehaviour
     public GameObject prefabEsfera;
 
     public float tiempoEntreLanzamientos = 2f;
-    public float fuerzaLanzamiento = 5f;
+
+    [Header("Movimiento de la pelota")]
+    public float duracionTrayectoria = 1.5f;
+    public float alturaParabola = 2f;
 
     [Header("Estadísticas de Jugador")]
     public int vidaMaxima = 3;
@@ -63,19 +66,45 @@ public class ControladorJuego : MonoBehaviour
                 Quaternion.identity
             );
 
-            Rigidbody rb = objetoClonado.GetComponent<Rigidbody>();
-
-            if (rb != null && jugador != null)
-            {
-                Vector3 direccion =
-                    (jugador.position - lanzadorElegido.position).normalized;
-
-                Debug.Log("Vector de disparo: " + direccion);
-
-                rb.AddForce(direccion * fuerzaLanzamiento, ForceMode.Impulse);
-            }
+            StartCoroutine(
+                MoverPelotaParabola(
+                    objetoClonado,
+                    lanzadorElegido.position,
+                    jugador.position
+                )
+            );
 
             Destroy(objetoClonado, 5f);
+        }
+    }
+
+    IEnumerator MoverPelotaParabola(GameObject pelota, Vector3 inicio, Vector3 final)
+    {
+        float tiempo = 0f;
+
+        while (tiempo < duracionTrayectoria)
+        {
+            if (pelota == null)
+                yield break;
+
+            float progreso = tiempo / duracionTrayectoria;
+
+            Vector3 posicionLineal = Vector3.Lerp(inicio, final, progreso);
+
+            float altura = 4 * alturaParabola * progreso * (1 - progreso);
+
+            posicionLineal.y += altura;
+
+            pelota.transform.position = posicionLineal;
+
+            tiempo += Time.deltaTime;
+
+            yield return null;
+        }
+
+        if (pelota != null)
+        {
+            pelota.transform.position = final;
         }
     }
 
