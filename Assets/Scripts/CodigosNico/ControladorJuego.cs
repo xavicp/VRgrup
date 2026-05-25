@@ -19,6 +19,9 @@ public class ControladorJuego : MonoBehaviour
     [Header("Estadísticas de Jugador")]
     public int vidaMaxima = 3;
 
+    [Header("UI")]
+    public MainMenuUI mainMenuUI;
+
     private int vida;
     private int puntos;
     private float tiempoPartida;
@@ -29,6 +32,10 @@ public class ControladorJuego : MonoBehaviour
     {
 
     }
+
+    // =========================
+    // EMPEZAR PARTIDA
+    // =========================
 
     public void EmpezarJuego()
     {
@@ -49,16 +56,23 @@ public class ControladorJuego : MonoBehaviour
         }
     }
 
+    // =========================
+    // LANZAMIENTO DE PELOTAS
+    // =========================
+
     IEnumerator RutinaLanzamiento()
     {
         while (!juegoTerminado)
         {
             yield return new WaitForSeconds(tiempoEntreLanzamientos);
 
-            if (juegoTerminado) break;
+            if (juegoTerminado)
+                break;
 
             int indicePlano = Random.Range(0, puntosLanzamiento.Length);
-            Transform lanzadorElegido = puntosLanzamiento[indicePlano];
+
+            Transform lanzadorElegido =
+                puntosLanzamiento[indicePlano];
 
             GameObject objetoClonado = Instantiate(
                 prefabEsfera,
@@ -78,7 +92,14 @@ public class ControladorJuego : MonoBehaviour
         }
     }
 
-    IEnumerator MoverPelotaParabola(GameObject pelota, Vector3 inicio, Vector3 final)
+    // =========================
+    // MOVIMIENTO PARABÓLICO
+    // =========================
+
+    IEnumerator MoverPelotaParabola(
+        GameObject pelota,
+        Vector3 inicio,
+        Vector3 final)
     {
         float tiempo = 0f;
 
@@ -87,15 +108,21 @@ public class ControladorJuego : MonoBehaviour
             if (pelota == null)
                 yield break;
 
-            float progreso = tiempo / duracionTrayectoria;
+            float progreso =
+                tiempo / duracionTrayectoria;
 
-            Vector3 posicionLineal = Vector3.Lerp(inicio, final, progreso);
+            Vector3 posicionLineal =
+                Vector3.Lerp(inicio, final, progreso);
 
-            float altura = 4 * alturaParabola * progreso * (1 - progreso);
+            float altura =
+                4 * alturaParabola *
+                progreso *
+                (1 - progreso);
 
             posicionLineal.y += altura;
 
-            pelota.transform.position = posicionLineal;
+            pelota.transform.position =
+                posicionLineal;
 
             tiempo += Time.deltaTime;
 
@@ -108,30 +135,52 @@ public class ControladorJuego : MonoBehaviour
         }
     }
 
+    // =========================
+    // PUNTOS
+    // =========================
+
     public void SumarPuntos()
     {
-        if (juegoTerminado) return;
+        if (juegoTerminado)
+            return;
 
         puntos += 10;
 
         Debug.Log("Puntos: " + puntos);
     }
 
+    // =========================
+    // VIDA
+    // =========================
+
     public void RestarVida()
     {
-        if (juegoTerminado) return;
+        if (juegoTerminado)
+            return;
 
         vida -= 1;
 
         Debug.Log("Vidas restantes: " + vida);
 
+        // GAME OVER
         if (vida <= 0)
         {
             juegoTerminado = true;
 
             Debug.Log("GAME OVER");
-            Debug.Log("Puntos finales: " + puntos);
-            Debug.Log("Tiempo sobrevivido: " + tiempoPartida);
+
+            Debug.Log(
+                "Puntos finales: " + puntos);
+
+            Debug.Log(
+                "Tiempo sobrevivido: " +
+                tiempoPartida);
+
+            // ACTIVAR GAME OVER UI
+            if (mainMenuUI != null)
+            {
+                mainMenuUI.GameOver();
+            }
         }
     }
 }
