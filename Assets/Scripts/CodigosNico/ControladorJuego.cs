@@ -4,17 +4,19 @@ using UnityEngine;
 
 public class ControladorJuego : MonoBehaviour
 {
-    [Header("Configuraci�n de Lanzamiento")]
+    [Header("Configuracion de Lanzamiento")]
     public Transform[] puntosLanzamiento;
     public Transform jugador;
 
-    public GameObject prefabCubo;
     public GameObject prefabEsfera;
 
+    [Header("Movimiento de la pelota")]
+    public float duracionTrayectoria = 1.5f;
+    public float alturaParabola = 2f;
     public float tiempoEntreLanzamientos = 2f;
     public float fuerzaLanzamiento = 5f;
 
-    [Header("Estad�sticas de Jugador")]
+    [Header("Estadisticas de Jugador")]
     public int vidaMaxima = 3;
 
     private int vida;
@@ -55,33 +57,68 @@ public class ControladorJuego : MonoBehaviour
         {
             yield return new WaitForSeconds(tiempoEntreLanzamientos);
 
-            if (juegoTerminado) break;
+            if (juegoTerminado)
+                break;
 
             int indicePlano = Random.Range(0, puntosLanzamiento.Length);
-            Transform lanzadorElegido = puntosLanzamiento[indicePlano];
 
-            GameObject objetoAVisualizar =
-                (Random.Range(0, 2) == 0) ? prefabCubo : prefabEsfera;
+            Transform lanzadorElegido =
+                puntosLanzamiento[indicePlano];
 
             GameObject objetoClonado = Instantiate(
-                objetoAVisualizar,
+                prefabEsfera,
                 lanzadorElegido.position,
                 Quaternion.identity
             );
 
-            Rigidbody rb = objetoClonado.GetComponent<Rigidbody>();
-
-            if (rb != null && jugador != null)
-            {
-                Vector3 direccion =
-                    (jugador.position - lanzadorElegido.position).normalized;
-
-                Debug.Log("Vector de disparo: " + direccion);
-
-                rb.AddForce(direccion * fuerzaLanzamiento, ForceMode.Impulse);
-            }
+            StartCoroutine(
+                MoverPelotaParabola(
+                    objetoClonado,
+                    lanzadorElegido.position,
+                    jugador.position
+                )
+            );
 
             Destroy(objetoClonado, 5f);
+        }
+    }
+
+    IEnumerator MoverPelotaParabola(
+        GameObject pelota,
+        Vector3 inicio,
+        Vector3 final)
+    {
+        float tiempo = 0f;
+
+        while (tiempo < duracionTrayectoria)
+        {
+            if (pelota == null)
+                yield break;
+
+            float progreso =
+                tiempo / duracionTrayectoria;
+
+            Vector3 posicionLineal =
+                Vector3.Lerp(inicio, final, progreso);
+
+            float altura =
+                4 * alturaParabola *
+                progreso *
+                (1 - progreso);
+
+            posicionLineal.y += altura;
+
+            pelota.transform.position =
+                posicionLineal;
+
+            tiempo += Time.deltaTime;
+
+            yield return null;
+        }
+
+        if (pelota != null)
+        {
+            pelota.transform.position = final;
         }
     }
 
