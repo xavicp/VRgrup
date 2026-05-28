@@ -843,6 +843,7 @@ GameObject:
   - component: {fileID: 225887661}
   - component: {fileID: 225887660}
   - component: {fileID: 225887659}
+  - component: {fileID: 225887662}
   m_Layer: 0
   m_Name: Lanzador_Izquierda
   m_TagString: Untagged
@@ -940,6 +941,18 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 225887657}
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &225887662
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 225887657}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3febd4f11746e6940ad7a3637d54c96c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &256258745
 GameObject:
   m_ObjectHideFlags: 0
@@ -2275,6 +2288,7 @@ GameObject:
   - component: {fileID: 495985919}
   - component: {fileID: 495985918}
   - component: {fileID: 495985917}
+  - component: {fileID: 495985921}
   m_Layer: 0
   m_Name: Lanzador_Centro (1)
   m_TagString: Untagged
@@ -2372,6 +2386,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: -85.392, y: 0, z: 0}
+--- !u!114 &495985921
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 495985915}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3febd4f11746e6940ad7a3637d54c96c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &515219657
 GameObject:
   m_ObjectHideFlags: 0
@@ -2384,6 +2410,7 @@ GameObject:
   - component: {fileID: 515219661}
   - component: {fileID: 515219660}
   - component: {fileID: 515219659}
+  - component: {fileID: 515219662}
   m_Layer: 0
   m_Name: Lanzador_Derecha
   m_TagString: Untagged
@@ -2481,6 +2508,18 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 515219657}
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &515219662
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 515219657}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3febd4f11746e6940ad7a3637d54c96c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &522728844 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4342425361971797402, guid: b6d57cedc6a73c94aad8ce006a26b41b, type: 3}
@@ -3485,6 +3524,7 @@ GameObject:
   - component: {fileID: 600439519}
   - component: {fileID: 600439518}
   - component: {fileID: 600439517}
+  - component: {fileID: 600439521}
   m_Layer: 0
   m_Name: Lanzador_Izquierda (2)
   m_TagString: Untagged
@@ -3582,6 +3622,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: -85.392, y: -40, z: 5.182}
+--- !u!114 &600439521
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 600439515}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3febd4f11746e6940ad7a3637d54c96c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &659577425 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8491520222511772541, guid: b6d57cedc6a73c94aad8ce006a26b41b, type: 3}
@@ -4155,6 +4207,7 @@ GameObject:
   - component: {fileID: 771123825}
   - component: {fileID: 771123824}
   - component: {fileID: 771123823}
+  - component: {fileID: 771123827}
   m_Layer: 0
   m_Name: Lanzador_Derecha (1)
   m_TagString: Untagged
@@ -4252,6 +4305,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: -85.392, y: 40, z: -3.138}
+--- !u!114 &771123827
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 771123821}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3febd4f11746e6940ad7a3637d54c96c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &798337360
 GameObject:
   m_ObjectHideFlags: 0
@@ -5477,6 +5542,7 @@ GameObject:
   - component: {fileID: 1206313802}
   - component: {fileID: 1206313801}
   - component: {fileID: 1206313800}
+  - component: {fileID: 1206313804}
   m_Layer: 0
   m_Name: Lanzador_Centro (2)
   m_TagString: Untagged
@@ -5574,6 +5640,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: -85.392, y: 0, z: 0}
+--- !u!114 &1206313804
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1206313798}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3febd4f11746e6940ad7a3637d54c96c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1218645642 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2287730480037448999, guid: b6d57cedc6a73c94aad8ce006a26b41b, type: 3}
@@ -6848,6 +6926,7 @@ GameObject:
   - component: {fileID: 1576689227}
   - component: {fileID: 1576689226}
   - component: {fileID: 1576689225}
+  - component: {fileID: 1576689229}
   m_Layer: 0
   m_Name: Lanzador_Izquierda (1)
   m_TagString: Untagged
@@ -6945,6 +7024,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: -85.392, y: -40, z: 5.182}
+--- !u!114 &1576689229
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1576689223}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3febd4f11746e6940ad7a3637d54c96c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1615728349
 GameObject:
   m_ObjectHideFlags: 0
@@ -7774,6 +7865,7 @@ GameObject:
   - component: {fileID: 1769682361}
   - component: {fileID: 1769682360}
   - component: {fileID: 1769682359}
+  - component: {fileID: 1769682363}
   m_Layer: 0
   m_Name: Lanzador_Derecha (2)
   m_TagString: Untagged
@@ -7871,6 +7963,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: -85.392, y: 40, z: -3.138}
+--- !u!114 &1769682363
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1769682357}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3febd4f11746e6940ad7a3637d54c96c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1800359842
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8239,6 +8343,7 @@ GameObject:
   - component: {fileID: 1818951620}
   - component: {fileID: 1818951619}
   - component: {fileID: 1818951618}
+  - component: {fileID: 1818951621}
   m_Layer: 0
   m_Name: Lanzador_Centro
   m_TagString: Untagged
@@ -8336,6 +8441,18 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1818951616}
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1818951621
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1818951616}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3febd4f11746e6940ad7a3637d54c96c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &1820850958 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8306700922104627377, guid: 66d40221d132d04499855da9ce315f20, type: 3}
