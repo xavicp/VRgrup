@@ -51,7 +51,7 @@ public class DetectorColision : MonoBehaviour
         }
 
         // PLAYER golpeado por ESFERA
-        if (gameObject.CompareTag("Player") &&
+        if (gameObject.CompareTag("MainCamera") &&
             collision.gameObject.CompareTag("Esfera"))
         {
             controlador.RestarVida();
