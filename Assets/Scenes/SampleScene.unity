@@ -2249,9 +2249,9 @@ MonoBehaviour:
   gameplayHUD: {fileID: 957969992}
   instructionsPanel: {fileID: 1871941002}
   recordsPanel: {fileID: 127543489}
-  gameOverPanel: {fileID: 0}
-  pausePanel: {fileID: 0}
-  panel: {fileID: 0}
+  gameOverPanel: {fileID: 1918534098}
+  pausePanel: {fileID: 1838425342}
+  panel: {fileID: 930765087}
 --- !u!114 &409568792
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3242,7 +3242,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &562591579
 RectTransform:
   m_ObjectHideFlags: 0
@@ -8972,7 +8972,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1918534099
 RectTransform:
   m_ObjectHideFlags: 0
