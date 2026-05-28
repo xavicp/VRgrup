@@ -1,4 +1,4 @@
-using UnityEngine;
+/*using UnityEngine;
 
 public class RotarHaciaJugador : MonoBehaviour
 {
@@ -32,6 +32,40 @@ public class RotarHaciaJugador : MonoBehaviour
             // Para que su cara plana mire al frente hacia ti, a veces hay que rotarlos 90 grados en el eje X.
             // Si ves que se giran de canto, añade esta línea descomentándola:
             // transform.Rotate(90, 0, 0);
+        }
+    }
+}*/
+using UnityEngine;
+
+public class RotarHaciaJugador : MonoBehaviour
+{
+    private Transform objetivoJugador;
+
+    void Start()
+    {
+        if (Camera.main != null)
+        {
+            objetivoJugador = Camera.main.transform;
+        }
+        else
+        {
+            Debug.LogError("No se encontró la Main Camera.");
+        }
+    }
+
+    void Update()
+    {
+        if (objetivoJugador != null)
+        {
+            Vector3 direccion =
+                objetivoJugador.position - transform.position;
+
+            // Evita inclinación vertical
+            direccion.y = 0;
+
+            // Rotación hacia el jugador
+            transform.rotation =
+                Quaternion.LookRotation(direccion);
         }
     }
 }

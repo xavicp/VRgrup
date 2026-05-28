@@ -1,4 +1,4 @@
-using UnityEngine;
+/*using UnityEngine;
 
 public class DetectorColision : MonoBehaviour
 {
@@ -25,6 +25,38 @@ public class DetectorColision : MonoBehaviour
         {
             controlador.RestarVida();
             Destroy(collision.gameObject); // Destruye la esfera para que no golpee dos veces
+        }
+    }
+}*/
+using UnityEngine;
+
+public class DetectorColision : MonoBehaviour
+{
+    private ControladorJuego controlador;
+
+    void Start()
+    {
+        controlador = FindObjectOfType<ControladorJuego>();
+    }
+
+    void OnCollisionEnter(Collision collision)
+    {
+        // MANO golpea CUBO
+        if (gameObject.CompareTag("Mano") &&
+            collision.gameObject.CompareTag("Cubo"))
+        {
+            controlador.SumarPuntos();
+
+            Destroy(collision.gameObject);
+        }
+
+        // PLAYER golpeado por ESFERA
+        if (gameObject.CompareTag("Player") &&
+            collision.gameObject.CompareTag("Esfera"))
+        {
+            controlador.RestarVida();
+
+            Destroy(collision.gameObject);
         }
     }
 }
