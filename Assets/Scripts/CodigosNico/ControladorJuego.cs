@@ -159,9 +159,12 @@ public class ControladorJuego : MonoBehaviour
     public GameObject prefabEsfera;
 
     [Header("Movimiento de la pelota")]
-    public float duracionTrayectoria = 1.5f;
+    public float duracionTrayectoria = 4f;
     public float alturaParabola = 2f;
     public float tiempoEntreLanzamientos = 2f;
+    public float variacionTrayectoria = 0.2f;
+    public float duracionMinima = 1f;
+    
 
     [Header("Distancia recta de disparo")]
     public float distanciaDisparo = 10f;
@@ -289,6 +292,16 @@ public class ControladorJuego : MonoBehaviour
         puntos += 1;
 
         Debug.Log("Puntos: " + puntos);
+
+        if (puntos >= 10 && puntos % 5 == 0)
+        {
+            duracionTrayectoria -= variacionTrayectoria;
+            if (duracionTrayectoria < duracionMinima)
+            {
+                duracionTrayectoria = duracionMinima;
+            }
+            Debug.Log("Nueva velocidad: " + duracionTrayectoria);
+        }
     }
 
     public void RestarVida()

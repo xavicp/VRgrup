@@ -3304,9 +3304,11 @@ MonoBehaviour:
   - {fileID: 600439520}
   - {fileID: 1769682362}
   prefabEsfera: {fileID: 8732821005063135858, guid: df84160dc5fb23c47b64edfa9c740bf7, type: 3}
-  duracionTrayectoria: 4
+  duracionTrayectoria: 1.5
   alturaParabola: 0
   tiempoEntreLanzamientos: 2
+  variacionTrayectoria: 0.2
+  duracionMinima: 0.5
   distanciaDisparo: 40
   vidaMaxima: 3
   mainMenuUI: {fileID: 409568791}
