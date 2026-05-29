@@ -150,14 +150,12 @@ public class ControladorJuego : MonoBehaviour
     }
 }*/
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class ControladorJuego : MonoBehaviour
 {
     [Header("Configuracion de Lanzamiento")]
     public Transform[] puntosLanzamiento;
-
     public GameObject prefabEsfera;
 
     [Header("Movimiento de la pelota")]
@@ -170,6 +168,9 @@ public class ControladorJuego : MonoBehaviour
 
     [Header("Estadisticas de Jugador")]
     public int vidaMaxima = 3;
+
+    [Header("UI")]
+    public MainMenuUI mainMenuUI;
 
     private int vida;
     private int puntos;
@@ -223,11 +224,9 @@ public class ControladorJuego : MonoBehaviour
                 Quaternion.identity
             );
 
-            // Dirección RECTA de la placa
             Vector3 direccion =
                 lanzadorElegido.forward;
 
-            // Punto final recto
             Vector3 destino =
                 lanzadorElegido.position +
                 direccion * distanciaDisparo;
@@ -287,7 +286,7 @@ public class ControladorJuego : MonoBehaviour
     {
         if (juegoTerminado) return;
 
-        puntos += 10;
+        puntos += 1;
 
         Debug.Log("Puntos: " + puntos);
     }
@@ -296,7 +295,7 @@ public class ControladorJuego : MonoBehaviour
     {
         if (juegoTerminado) return;
 
-        vida -= 1;
+        vida--;
 
         Debug.Log("Vidas restantes: " + vida);
 
@@ -307,6 +306,11 @@ public class ControladorJuego : MonoBehaviour
             Debug.Log("GAME OVER");
             Debug.Log("Puntos finales: " + puntos);
             Debug.Log("Tiempo sobrevivido: " + tiempoPartida);
+
+            if (mainMenuUI != null)
+            {
+                mainMenuUI.GameOver();
+            }
         }
     }
 }

@@ -3309,6 +3309,7 @@ MonoBehaviour:
   tiempoEntreLanzamientos: 2
   distanciaDisparo: 40
   vidaMaxima: 3
+  mainMenuUI: {fileID: 409568791}
 --- !u!4 &571591039
 Transform:
   m_ObjectHideFlags: 0

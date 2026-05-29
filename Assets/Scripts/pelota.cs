@@ -18,7 +18,7 @@ public class pelota : MonoBehaviour
             return;
 
         // Detectar jugador
-        if (other.CompareTag("Player"))
+        if (other.CompareTag("MainCamera"))
         {
             haImpactado = true;
 
@@ -27,6 +27,14 @@ public class pelota : MonoBehaviour
             Debug.Log("Jugador impactado");
 
             Destroy(gameObject);
+        }
+    }
+    private void OnDestroy()
+    {
+        if (!haImpactado && controladorJuego != null)
+        {
+            controladorJuego.SumarPuntos();
+            Debug.Log("Pelota esquivada");
         }
     }
 }
