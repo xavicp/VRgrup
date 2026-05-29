@@ -2216,7 +2216,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 1.8}
+  m_AnchoredPosition: {x: 0, y: 1.416}
   m_SizeDelta: {x: 900, y: 1000}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &409568791
@@ -2239,6 +2239,7 @@ MonoBehaviour:
   gameOverPanel: {fileID: 1918534098}
   pausePanel: {fileID: 1838425342}
   panel: {fileID: 930765087}
+  controladorJuego: {fileID: 571591038}
 --- !u!114 &409568792
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3304,14 +3305,16 @@ MonoBehaviour:
   - {fileID: 600439520}
   - {fileID: 1769682362}
   prefabEsfera: {fileID: 8732821005063135858, guid: df84160dc5fb23c47b64edfa9c740bf7, type: 3}
-  duracionTrayectoria: 1.5
+  duracionTrayectoria: 4
   alturaParabola: 0
   tiempoEntreLanzamientos: 2
-  variacionTrayectoria: 0.2
-  duracionMinima: 0.5
   distanciaDisparo: 40
   vidaMaxima: 3
   mainMenuUI: {fileID: 409568791}
+  textoPuntuacion: {fileID: 124330760}
+  corazon1: {fileID: 1857700498}
+  corazon2: {fileID: 729447145}
+  corazon3: {fileID: 892861811}
 --- !u!4 &571591039
 Transform:
   m_ObjectHideFlags: 0
@@ -3676,7 +3679,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 674053173}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 409568791}
+        m_TargetAssemblyTypeName: MainMenuUI, Assembly-CSharp
+        m_MethodName: ReturnToMainMenu
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &674053173
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3908,7 +3923,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 722802358}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 409568791}
+        m_TargetAssemblyTypeName: MainMenuUI, Assembly-CSharp
+        m_MethodName: RestartGame
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &722802358
 MonoBehaviour:
   m_ObjectHideFlags: 0

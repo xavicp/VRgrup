@@ -17,20 +17,19 @@ public class MainMenuUI : MonoBehaviour
     [Header("Background")]
     public GameObject panel;
 
-    // CONTROL
+    [Header("Game Manager")]
+    public ControladorJuego controladorJuego;
+
     private bool isPaused = false;
     private bool inGameplay = false;
 
-    // CONTROL BOTÓN A
     private bool buttonPressedLastFrame = false;
 
     void Update()
     {
-        // SOLO FUNCIONA EN GAMEPLAY
         if (!inGameplay)
             return;
 
-        // MANDO DERECHO QUEST
         InputDevice rightHand =
             InputDevices.GetDeviceAtXRNode(XRNode.RightHand);
 
@@ -40,17 +39,12 @@ public class MainMenuUI : MonoBehaviour
             CommonUsages.primaryButton,
             out aButtonPressed))
         {
-            // DETECTAR SOLO UNA PULSACIÓN
             if (aButtonPressed && !buttonPressedLastFrame)
             {
                 if (!isPaused)
-                {
                     OpenPause();
-                }
                 else
-                {
                     ClosePause();
-                }
             }
 
             buttonPressedLastFrame = aButtonPressed;
@@ -58,7 +52,7 @@ public class MainMenuUI : MonoBehaviour
     }
 
     // =========================
-    // MENÚ PRINCIPAL
+    // MENU PRINCIPAL
     // =========================
 
     public void PlayGame()
@@ -76,6 +70,10 @@ public class MainMenuUI : MonoBehaviour
     public void BackToMainMenu()
     {
         instructionsPanel.SetActive(false);
+        recordsPanel.SetActive(false);
+        warningPanel.SetActive(false);
+
+        panel.SetActive(true);
         mainMenuPanel.SetActive(true);
     }
 
@@ -105,6 +103,11 @@ public class MainMenuUI : MonoBehaviour
         gameplayHUD.SetActive(true);
 
         Time.timeScale = 1f;
+
+        if (controladorJuego != null)
+        {
+            controladorJuego.EmpezarJuego();
+        }
     }
 
     // =========================
@@ -135,13 +138,15 @@ public class MainMenuUI : MonoBehaviour
         Time.timeScale = 1f;
     }
 
-    // BOTÓN CONTINUAR
     public void ContinueGameplay()
     {
         ClosePause();
     }
 
-    // BOTÓN MENÚ PRINCIPAL
+    // =========================
+    // MENU PRINCIPAL
+    // =========================
+
     public void ReturnToMainMenu()
     {
         Time.timeScale = 1f;
@@ -149,7 +154,6 @@ public class MainMenuUI : MonoBehaviour
         isPaused = false;
         inGameplay = false;
 
-        // OCULTAR TODO
         pausePanel.SetActive(false);
         gameOverPanel.SetActive(false);
         warningPanel.SetActive(false);
@@ -157,9 +161,31 @@ public class MainMenuUI : MonoBehaviour
         recordsPanel.SetActive(false);
         gameplayHUD.SetActive(false);
 
-        // MOSTRAR MENÚ
         panel.SetActive(true);
         mainMenuPanel.SetActive(true);
+    }
+
+    // =========================
+    // REINICIAR PARTIDA
+    // =========================
+
+    public void RestartGame()
+    {
+        Time.timeScale = 1f;
+
+        gameOverPanel.SetActive(false);
+        pausePanel.SetActive(false);
+        panel.SetActive(false);
+
+        gameplayHUD.SetActive(true);
+
+        isPaused = false;
+        inGameplay = true;
+
+        if (controladorJuego != null)
+        {
+            controladorJuego.ReiniciarJuego();
+        }
     }
 
     // =========================

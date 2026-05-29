@@ -151,6 +151,7 @@ public class ControladorJuego : MonoBehaviour
 }*/
 using System.Collections;
 using UnityEngine;
+using TMPro;
 
 public class ControladorJuego : MonoBehaviour
 {
@@ -159,12 +160,9 @@ public class ControladorJuego : MonoBehaviour
     public GameObject prefabEsfera;
 
     [Header("Movimiento de la pelota")]
-    public float duracionTrayectoria = 4f;
+    public float duracionTrayectoria = 1.5f;
     public float alturaParabola = 2f;
     public float tiempoEntreLanzamientos = 2f;
-    public float variacionTrayectoria = 0.2f;
-    public float duracionMinima = 1f;
-    
 
     [Header("Distancia recta de disparo")]
     public float distanciaDisparo = 10f;
@@ -175,26 +173,68 @@ public class ControladorJuego : MonoBehaviour
     [Header("UI")]
     public MainMenuUI mainMenuUI;
 
+    [Header("HUD Puntuacion")]
+    public TMP_Text textoPuntuacion;
+
+    [Header("HUD Vidas")]
+    public GameObject corazon1;
+    public GameObject corazon2;
+    public GameObject corazon3;
+
     private int vida;
     private int puntos;
     private float tiempoPartida;
 
     private bool juegoTerminado = false;
 
-    private int record = 0;
-
-    void Start()
+    void ActualizarHUD()
     {
+        if (textoPuntuacion != null)
+        {
+            textoPuntuacion.text = puntos.ToString("0000");
+        }
+    }
 
+    void ActualizarVidasHUD()
+    {
+        if (corazon1 != null)
+            corazon1.SetActive(vida >= 1);
+
+        if (corazon2 != null)
+            corazon2.SetActive(vida >= 2);
+
+        if (corazon3 != null)
+            corazon3.SetActive(vida >= 3);
     }
 
     public void EmpezarJuego()
     {
+        StopAllCoroutines();
+
         vida = vidaMaxima;
         puntos = 0;
         tiempoPartida = 0f;
 
         juegoTerminado = false;
+
+        ActualizarHUD();
+        ActualizarVidasHUD();
+
+        StartCoroutine(RutinaLanzamiento());
+    }
+
+    public void ReiniciarJuego()
+    {
+        StopAllCoroutines();
+
+        vida = vidaMaxima;
+        puntos = 0;
+        tiempoPartida = 0f;
+
+        juegoTerminado = false;
+
+        ActualizarHUD();
+        ActualizarVidasHUD();
 
         StartCoroutine(RutinaLanzamiento());
     }
@@ -214,7 +254,7 @@ public class ControladorJuego : MonoBehaviour
             yield return new WaitForSeconds(tiempoEntreLanzamientos);
 
             if (juegoTerminado)
-                break;
+                yield break;
 
             int indicePlano = Random.Range(0, puntosLanzamiento.Length);
 
@@ -227,8 +267,7 @@ public class ControladorJuego : MonoBehaviour
                 Quaternion.identity
             );
 
-            Vector3 direccion =
-                lanzadorElegido.forward;
+            Vector3 direccion = lanzadorElegido.forward;
 
             Vector3 destino =
                 lanzadorElegido.position +
@@ -287,28 +326,24 @@ public class ControladorJuego : MonoBehaviour
 
     public void SumarPuntos()
     {
-        if (juegoTerminado) return;
+        if (juegoTerminado)
+            return;
 
-        puntos += 1;
+        puntos += 10;
+
+        ActualizarHUD();
 
         Debug.Log("Puntos: " + puntos);
-
-        if (puntos >= 10 && puntos % 5 == 0)
-        {
-            duracionTrayectoria -= variacionTrayectoria;
-            if (duracionTrayectoria < duracionMinima)
-            {
-                duracionTrayectoria = duracionMinima;
-            }
-            Debug.Log("Nueva velocidad: " + duracionTrayectoria);
-        }
     }
 
     public void RestarVida()
     {
-        if (juegoTerminado) return;
+        if (juegoTerminado)
+            return;
 
         vida--;
+
+        ActualizarVidasHUD();
 
         Debug.Log("Vidas restantes: " + vida);
 
