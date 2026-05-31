@@ -19,10 +19,8 @@ public class Diana : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         Debug.Log(
-            "He tocado: " +
-            other.name +
-            " | Tag: " +
-            other.tag
+            "Nombre: " + other.name +
+            " | Tag: " + other.tag
         );
 
         if (golpeada)
@@ -30,19 +28,33 @@ public class Diana : MonoBehaviour
 
         if (
             other.CompareTag("Mano") ||
-            other.name.Contains("Capsule collider")
+            other.name.Contains("Capsule")
         )
         {
-            Debug.Log(
-                "Diana golpeada por: " +
-                other.name
-            );
+            Debug.Log("HE ENTRADO EN EL IF");
+            Debug.Log("Diana golpeada por: " + other.name);
 
             golpeada = true;
 
-            controladorJuego.SumarPuntos();
+            if (controladorJuego != null)
+            {
+                controladorJuego.SumarPuntos();
+                Debug.Log("Puntos sumados");
+            }
+            else
+            {
+                Debug.LogError("No se encontró ControladorJuego");
+            }
 
-            controladorDianas.DianaGolpeada();
+            if (controladorDianas != null)
+            {
+                controladorDianas.DianaGolpeada();
+                Debug.Log("Respawn de diana");
+            }
+            else
+            {
+                Debug.LogError("No se encontró ControladorDianas");
+            }
 
             Destroy(gameObject);
         }
