@@ -16,9 +16,26 @@ public class ControladorDianas : MonoBehaviour
 
     private GameObject dianaActual;
 
-    void Start()
+    public void EmpezarDianas()
     {
+        StopAllCoroutines();
+
+        if (dianaActual != null)
+        {
+            Destroy(dianaActual);
+        }
+
         SpawnNuevaDiana();
+    }
+
+    public void DetenerDianas()
+    {
+        StopAllCoroutines();
+
+        if (dianaActual != null)
+        {
+            Destroy(dianaActual);
+        }
     }
 
     void SpawnNuevaDiana()
