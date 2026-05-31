@@ -18,11 +18,15 @@ public class Diana : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        Debug.Log("He tocado: " + other.name);
+
         if (golpeada)
             return;
 
         if (other.CompareTag("Mano"))
         {
+            Debug.Log("Diana golpeada por: " + other.name);
+
             golpeada = true;
 
             controladorJuego.SumarPuntos();
