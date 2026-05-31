@@ -18,14 +18,25 @@ public class Diana : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log("He tocado: " + other.name);
+        Debug.Log(
+            "He tocado: " +
+            other.name +
+            " | Tag: " +
+            other.tag
+        );
 
         if (golpeada)
             return;
 
-        if (other.CompareTag("Mano"))
+        if (
+            other.CompareTag("Mano") ||
+            other.name.Contains("Capsule collider")
+        )
         {
-            Debug.Log("Diana golpeada por: " + other.name);
+            Debug.Log(
+                "Diana golpeada por: " +
+                other.name
+            );
 
             golpeada = true;
 
