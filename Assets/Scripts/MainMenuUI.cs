@@ -20,9 +20,6 @@ public class MainMenuUI : MonoBehaviour
     [Header("Game Manager")]
     public ControladorJuego controladorJuego;
 
-    [Header("Controlador Dianas")]
-    public ControladorDianas controladorDianas;
-
     private bool isPaused = false;
     private bool inGameplay = false;
 
@@ -111,11 +108,6 @@ public class MainMenuUI : MonoBehaviour
         {
             controladorJuego.EmpezarJuego();
         }
-
-        if (controladorDianas != null)
-        {
-            controladorDianas.EmpezarDianas();
-        }
     }
 
     // =========================
@@ -169,11 +161,6 @@ public class MainMenuUI : MonoBehaviour
         recordsPanel.SetActive(false);
         gameplayHUD.SetActive(false);
 
-        if (controladorDianas != null)
-        {
-            controladorDianas.DetenerDianas();
-        }
-
         panel.SetActive(true);
         mainMenuPanel.SetActive(true);
     }
@@ -199,11 +186,6 @@ public class MainMenuUI : MonoBehaviour
         {
             controladorJuego.ReiniciarJuego();
         }
-
-        if (controladorDianas != null)
-        {
-            controladorDianas.EmpezarDianas();
-        }
     }
 
     // =========================
@@ -221,11 +203,6 @@ public class MainMenuUI : MonoBehaviour
         pausePanel.SetActive(false);
 
         gameOverPanel.SetActive(true);
-
-        if (controladorDianas != null)
-        {
-            controladorDianas.DetenerDianas();
-        }
 
         Time.timeScale = 0f;
     }

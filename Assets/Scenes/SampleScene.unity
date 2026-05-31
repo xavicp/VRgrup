@@ -3342,6 +3342,7 @@ MonoBehaviour:
   distanciaDisparo: 40
   vidaMaxima: 3
   mainMenuUI: {fileID: 409568791}
+  controladorDianas: {fileID: 1240546452}
   textoPuntuacion: {fileID: 124330760}
   corazon1: {fileID: 1857700498}
   corazon2: {fileID: 729447145}
