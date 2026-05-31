@@ -35,6 +35,8 @@ public class ControladorJuego : MonoBehaviour
 
     private int vida;
     private int puntos;
+    private int record;
+
     private float tiempoPartida;
 
     private bool juegoTerminado = false;
@@ -59,6 +61,16 @@ public class ControladorJuego : MonoBehaviour
             corazon3.SetActive(vida >= 3);
     }
 
+    public int ObtenerPuntuacion()
+    {
+        return puntos;
+    }
+
+    public int ObtenerRecord()
+    {
+        return PlayerPrefs.GetInt("Record", 0);
+    }
+
     public void EmpezarJuego()
     {
         StopAllCoroutines();
@@ -66,6 +78,8 @@ public class ControladorJuego : MonoBehaviour
         vida = vidaMaxima;
         puntos = 0;
         tiempoPartida = 0f;
+
+        record = PlayerPrefs.GetInt("Record", 0);
 
         juegoTerminado = false;
 
@@ -87,6 +101,8 @@ public class ControladorJuego : MonoBehaviour
         vida = vidaMaxima;
         puntos = 0;
         tiempoPartida = 0f;
+
+        record = PlayerPrefs.GetInt("Record", 0);
 
         juegoTerminado = false;
 
@@ -213,6 +229,14 @@ public class ControladorJuego : MonoBehaviour
         {
             juegoTerminado = true;
 
+            if (puntos > record)
+            {
+                record = puntos;
+
+                PlayerPrefs.SetInt("Record", record);
+                PlayerPrefs.Save();
+            }
+
             if (controladorDianas != null)
             {
                 controladorDianas.DetenerDianas();
@@ -224,6 +248,7 @@ public class ControladorJuego : MonoBehaviour
 
             if (mainMenuUI != null)
             {
+                mainMenuUI.MostrarPuntuacionFinal(puntos);
                 mainMenuUI.GameOver();
             }
         }

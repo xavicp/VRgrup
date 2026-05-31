@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.XR;
+using TMPro;
 
 public class MainMenuUI : MonoBehaviour
 {
@@ -20,9 +21,14 @@ public class MainMenuUI : MonoBehaviour
     [Header("Game Manager")]
     public ControladorJuego controladorJuego;
 
+    [Header("Game Over")]
+    public TMP_Text textoPuntuacionFinal;
+
+    [Header("Records")]
+    public TMP_Text textoRecord;
+
     private bool isPaused = false;
     private bool inGameplay = false;
-
     private bool buttonPressedLastFrame = false;
 
     void Update()
@@ -51,9 +57,14 @@ public class MainMenuUI : MonoBehaviour
         }
     }
 
-    // =========================
-    // MENU PRINCIPAL
-    // =========================
+    public void MostrarPuntuacionFinal(int puntuacion)
+    {
+        if (textoPuntuacionFinal != null)
+        {
+            textoPuntuacionFinal.text =
+                "PUNTOS: " + puntuacion.ToString("0000");
+        }
+    }
 
     public void PlayGame()
     {
@@ -81,6 +92,13 @@ public class MainMenuUI : MonoBehaviour
     {
         mainMenuPanel.SetActive(false);
         recordsPanel.SetActive(true);
+
+        if (textoRecord != null)
+        {
+            textoRecord.text =
+                PlayerPrefs.GetInt("Record", 0)
+                .ToString("0000");
+        }
     }
 
     public void BackFromRecords()
@@ -88,10 +106,6 @@ public class MainMenuUI : MonoBehaviour
         recordsPanel.SetActive(false);
         mainMenuPanel.SetActive(true);
     }
-
-    // =========================
-    // GAMEPLAY
-    // =========================
 
     public void StartGameplay()
     {
@@ -109,10 +123,6 @@ public class MainMenuUI : MonoBehaviour
             controladorJuego.EmpezarJuego();
         }
     }
-
-    // =========================
-    // PAUSA
-    // =========================
 
     public void OpenPause()
     {
@@ -143,10 +153,6 @@ public class MainMenuUI : MonoBehaviour
         ClosePause();
     }
 
-    // =========================
-    // MENU PRINCIPAL
-    // =========================
-
     public void ReturnToMainMenu()
     {
         Time.timeScale = 1f;
@@ -164,10 +170,6 @@ public class MainMenuUI : MonoBehaviour
         panel.SetActive(true);
         mainMenuPanel.SetActive(true);
     }
-
-    // =========================
-    // REINICIAR PARTIDA
-    // =========================
 
     public void RestartGame()
     {
@@ -187,10 +189,6 @@ public class MainMenuUI : MonoBehaviour
             controladorJuego.ReiniciarJuego();
         }
     }
-
-    // =========================
-    // GAME OVER
-    // =========================
 
     public void GameOver()
     {
