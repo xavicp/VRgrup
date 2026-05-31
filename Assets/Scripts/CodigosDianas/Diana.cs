@@ -2,14 +2,18 @@ using UnityEngine;
 
 public class Diana : MonoBehaviour
 {
-    private ControladorDianas controlador;
+    private ControladorDianas controladorDianas;
+    private ControladorJuego controladorJuego;
 
     private bool golpeada = false;
 
     void Start()
     {
-        controlador =
+        controladorDianas =
             FindObjectOfType<ControladorDianas>();
+
+        controladorJuego =
+            FindObjectOfType<ControladorJuego>();
     }
 
     private void OnTriggerEnter(Collider other)
@@ -21,9 +25,9 @@ public class Diana : MonoBehaviour
         {
             golpeada = true;
 
-            Debug.Log("Diana golpeada");
+            controladorJuego.SumarPuntos();
 
-            controlador.DianaGolpeada();
+            controladorDianas.DianaGolpeada();
 
             Destroy(gameObject);
         }

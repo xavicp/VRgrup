@@ -3,14 +3,16 @@ using UnityEngine;
 
 public class ControladorDianas : MonoBehaviour
 {
-    [Header("Zona de Spawn")]
-    public Transform zonaDianas;
+    [Header("Puntos de aparición")]
+    public Transform puntoDianaIzquierda;
+    public Transform puntoDianaDerecha;
 
     [Header("Prefab")]
     public GameObject prefabDiana;
 
-    [Header("Tiempo")]
+    [Header("Tiempos")]
     public float tiempoCambio = 3f;
+    public float delayRespawn = 0.5f;
 
     private GameObject dianaActual;
 
@@ -21,45 +23,36 @@ public class ControladorDianas : MonoBehaviour
 
     void SpawnNuevaDiana()
     {
-        if (dianaActual != null)
-        {
-            Destroy(dianaActual);
-        }
+        Transform puntoElegido;
 
-        Vector3 posicionAleatoria = ObtenerPosicionAleatoria();
+        if (Random.Range(0, 2) == 0)
+        {
+            puntoElegido = puntoDianaIzquierda;
+        }
+        else
+        {
+            puntoElegido = puntoDianaDerecha;
+        }
 
         dianaActual = Instantiate(
             prefabDiana,
-            posicionAleatoria,
-            Quaternion.identity
+            puntoElegido.position,
+            puntoElegido.rotation
         );
 
         StartCoroutine(TemporizadorDiana());
     }
 
-    Vector3 ObtenerPosicionAleatoria()
-    {
-        Vector3 centro = zonaDianas.position;
-        Vector3 escala = zonaDianas.localScale;
-
-        float x = Random.Range(
-            centro.x - escala.x / 2f,
-            centro.x + escala.x / 2f
-        );
-
-        float y = Random.Range(
-            centro.y - escala.y / 2f,
-            centro.y + escala.y / 2f
-        );
-
-        float z = centro.z;
-
-        return new Vector3(x, y, z);
-    }
-
     IEnumerator TemporizadorDiana()
     {
         yield return new WaitForSeconds(tiempoCambio);
+
+        if (dianaActual != null)
+        {
+            Destroy(dianaActual);
+        }
+
+        yield return new WaitForSeconds(delayRespawn);
 
         SpawnNuevaDiana();
     }
@@ -67,6 +60,18 @@ public class ControladorDianas : MonoBehaviour
     public void DianaGolpeada()
     {
         StopAllCoroutines();
+
+        if (dianaActual != null)
+        {
+            Destroy(dianaActual);
+        }
+
+        StartCoroutine(RespawnDiana());
+    }
+
+    IEnumerator RespawnDiana()
+    {
+        yield return new WaitForSeconds(delayRespawn);
 
         SpawnNuevaDiana();
     }
