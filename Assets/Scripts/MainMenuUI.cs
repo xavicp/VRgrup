@@ -48,9 +48,13 @@ public class MainMenuUI : MonoBehaviour
             if (aButtonPressed && !buttonPressedLastFrame)
             {
                 if (!isPaused)
+                {
                     OpenPause();
+                }
                 else
+                {
                     ClosePause();
+                }
             }
 
             buttonPressedLastFrame = aButtonPressed;
@@ -156,6 +160,11 @@ public class MainMenuUI : MonoBehaviour
     public void ReturnToMainMenu()
     {
         Time.timeScale = 1f;
+
+        if (controladorJuego != null)
+        {
+            controladorJuego.TerminarPartida();
+        }
 
         isPaused = false;
         inGameplay = false;

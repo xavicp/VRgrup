@@ -106,6 +106,13 @@ public class ControladorJuego : MonoBehaviour
     {
         StopAllCoroutines();
 
+        juegoTerminado = true;
+
+        if (controladorDianas != null)
+        {
+            controladorDianas.DetenerDianas();
+        }
+
         vida = vidaMaxima;
         puntos = 0;
         tiempoPartida = 0f;
@@ -248,7 +255,17 @@ public class ControladorJuego : MonoBehaviour
 
         Debug.Log("Puntos: " + puntos);
     }
+    public void TerminarPartida()
+    {
+        juegoTerminado = true;
 
+        StopAllCoroutines();
+
+        if (controladorDianas != null)
+        {
+            controladorDianas.DetenerDianas();
+        }
+    }
     public void RestarVida()
     {
         if (juegoTerminado)
