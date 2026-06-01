@@ -6,10 +6,18 @@ public class ControladorJuego : MonoBehaviour
 {
     [Header("Configuracion de Lanzamiento")]
     public Transform[] puntosLanzamiento;
-    public GameObject prefabEsfera;
+
+    [Header("Prefabs de Pelotas")]
+    public GameObject pelotaPequena;
+    public GameObject pelotaMediana;
+    public GameObject pelotaGrande;
+
+    [Header("Velocidad de Pelotas")]
+    public float velocidadPelotaPequena = 0.8f;
+    public float velocidadPelotaMediana = 1.5f;
+    public float velocidadPelotaGrande = 2.2f;
 
     [Header("Movimiento de la pelota")]
-    public float duracionTrayectoria = 1.5f;
     public float alturaParabola = 2f;
     public float tiempoEntreLanzamientos = 2f;
 
@@ -134,18 +142,43 @@ public class ControladorJuego : MonoBehaviour
             if (juegoTerminado)
                 yield break;
 
-            int indicePlano = Random.Range(0, puntosLanzamiento.Length);
+            int indicePlano =
+                Random.Range(0, puntosLanzamiento.Length);
 
             Transform lanzadorElegido =
                 puntosLanzamiento[indicePlano];
 
+            GameObject prefabSeleccionado = null;
+            float duracionTrayectoria = 1f;
+
+            int tipoPelota = Random.Range(0, 3);
+
+            switch (tipoPelota)
+            {
+                case 0:
+                    prefabSeleccionado = pelotaPequena;
+                    duracionTrayectoria = velocidadPelotaPequena;
+                    break;
+
+                case 1:
+                    prefabSeleccionado = pelotaMediana;
+                    duracionTrayectoria = velocidadPelotaMediana;
+                    break;
+
+                case 2:
+                    prefabSeleccionado = pelotaGrande;
+                    duracionTrayectoria = velocidadPelotaGrande;
+                    break;
+            }
+
             GameObject objetoClonado = Instantiate(
-                prefabEsfera,
+                prefabSeleccionado,
                 lanzadorElegido.position,
                 Quaternion.identity
             );
 
-            Vector3 direccion = lanzadorElegido.forward;
+            Vector3 direccion =
+                lanzadorElegido.forward;
 
             Vector3 destino =
                 lanzadorElegido.position +
@@ -155,7 +188,8 @@ public class ControladorJuego : MonoBehaviour
                 MoverPelotaParabola(
                     objetoClonado,
                     lanzadorElegido.position,
-                    destino
+                    destino,
+                    duracionTrayectoria
                 )
             );
 
@@ -166,17 +200,18 @@ public class ControladorJuego : MonoBehaviour
     IEnumerator MoverPelotaParabola(
         GameObject pelota,
         Vector3 inicio,
-        Vector3 final)
+        Vector3 final,
+        float duracion)
     {
         float tiempo = 0f;
 
-        while (tiempo < duracionTrayectoria)
+        while (tiempo < duracion)
         {
             if (pelota == null)
                 yield break;
 
             float progreso =
-                tiempo / duracionTrayectoria;
+                tiempo / duracion;
 
             Vector3 posicionLineal =
                 Vector3.Lerp(inicio, final, progreso);
