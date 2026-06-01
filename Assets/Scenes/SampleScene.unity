@@ -3702,23 +3702,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   puntosLanzamiento:
-  - {fileID: 1818951617}
-  - {fileID: 225887658}
-  - {fileID: 515219658}
-  - {fileID: 495985920}
-  - {fileID: 1576689228}
-  - {fileID: 771123826}
-  - {fileID: 1206313803}
-  - {fileID: 600439520}
-  - {fileID: 1769682362}
-  - {fileID: 1966500457}
   - {fileID: 335778070}
+  - {fileID: 1966500457}
   - {fileID: 96688258}
-  - {fileID: 1920299668}
   - {fileID: 212669263}
+  - {fileID: 1920299668}
   - {fileID: 815020213}
-  - {fileID: 380382650}
   - {fileID: 1796388495}
+  - {fileID: 380382650}
   - {fileID: 625158337}
   pelotaPequena: {fileID: 8732821005063135858, guid: df84160dc5fb23c47b64edfa9c740bf7, type: 3}
   pelotaMediana: {fileID: 8732821005063135858, guid: 0c621339a6d71e943867b06c613491b3, type: 3}
