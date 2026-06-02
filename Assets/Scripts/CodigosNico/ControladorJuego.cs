@@ -31,7 +31,7 @@ public class ControladorJuego : MonoBehaviour
     public MainMenuUI mainMenuUI;
 
     [Header("Dianas")]
-    public ControladorDianas controladorDianas;
+    public ControladorDianas targetController;
 
     [Header("HUD Puntuacion")]
     public TMP_Text textoPuntuacion;
@@ -94,9 +94,9 @@ public class ControladorJuego : MonoBehaviour
         ActualizarHUD();
         ActualizarVidasHUD();
 
-        if (controladorDianas != null)
+        if (targetController != null)
         {
-            controladorDianas.EmpezarDianas();
+            targetController.StartTargets();
         }
 
         StartCoroutine(RutinaLanzamiento());
@@ -108,9 +108,9 @@ public class ControladorJuego : MonoBehaviour
 
         juegoTerminado = true;
 
-        if (controladorDianas != null)
+        if (targetController != null)
         {
-            controladorDianas.DetenerDianas();
+            targetController.StopTargets();
         }
 
         vida = vidaMaxima;
@@ -124,9 +124,9 @@ public class ControladorJuego : MonoBehaviour
         ActualizarHUD();
         ActualizarVidasHUD();
 
-        if (controladorDianas != null)
+        if (targetController != null)
         {
-            controladorDianas.EmpezarDianas();
+            targetController.StartTargets();
         }
 
         StartCoroutine(RutinaLanzamiento());
@@ -255,17 +255,19 @@ public class ControladorJuego : MonoBehaviour
 
         Debug.Log("Puntos: " + puntos);
     }
+
     public void TerminarPartida()
     {
         juegoTerminado = true;
 
         StopAllCoroutines();
 
-        if (controladorDianas != null)
+        if (targetController != null)
         {
-            controladorDianas.DetenerDianas();
+            targetController.StopTargets();
         }
     }
+
     public void RestarVida()
     {
         if (juegoTerminado)
@@ -289,9 +291,9 @@ public class ControladorJuego : MonoBehaviour
                 PlayerPrefs.Save();
             }
 
-            if (controladorDianas != null)
+            if (targetController != null)
             {
-                controladorDianas.DetenerDianas();
+                targetController.StopTargets();
             }
 
             Debug.Log("GAME OVER");

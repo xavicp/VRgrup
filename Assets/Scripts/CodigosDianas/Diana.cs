@@ -2,28 +2,28 @@ using UnityEngine;
 
 public class Diana : MonoBehaviour
 {
-    private ControladorDianas controladorDianas;
-    private ControladorJuego controladorJuego;
+    private ControladorDianas targetController;
+    private ControladorJuego gameController;
 
-    private bool golpeada = false;
+    private bool hasBeenHit = false;
 
     void Start()
     {
-        controladorDianas =
+        targetController =
             FindObjectOfType<ControladorDianas>();
 
-        controladorJuego =
+        gameController =
             FindObjectOfType<ControladorJuego>();
     }
 
     private void OnTriggerEnter(Collider other)
     {
         Debug.Log(
-            "Nombre: " + other.name +
+            "Name: " + other.name +
             " | Tag: " + other.tag
         );
 
-        if (golpeada)
+        if (hasBeenHit)
             return;
 
         if (
@@ -31,29 +31,29 @@ public class Diana : MonoBehaviour
             other.name.Contains("Capsule")
         )
         {
-            Debug.Log("HE ENTRADO EN EL IF");
-            Debug.Log("Diana golpeada por: " + other.name);
+            Debug.Log("TARGET HIT");
+            Debug.Log("Hit by: " + other.name);
 
-            golpeada = true;
+            hasBeenHit = true;
 
-            if (controladorJuego != null)
+            if (gameController != null)
             {
-                controladorJuego.SumarPuntos();
-                Debug.Log("Puntos sumados");
+                gameController.SumarPuntos();
+                Debug.Log("Points added");
             }
             else
             {
-                Debug.LogError("No se encontró ControladorJuego");
+                Debug.LogError("GameController not found");
             }
 
-            if (controladorDianas != null)
+            if (targetController != null)
             {
-                controladorDianas.DianaGolpeada();
-                Debug.Log("Respawn de diana");
+                targetController.TargetHit();
+                Debug.Log("Target respawn");
             }
             else
             {
-                Debug.LogError("No se encontró ControladorDianas");
+                Debug.LogError("TargetController not found");
             }
 
             Destroy(gameObject);

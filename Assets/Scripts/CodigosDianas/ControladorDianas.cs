@@ -3,93 +3,93 @@ using UnityEngine;
 
 public class ControladorDianas : MonoBehaviour
 {
-    [Header("Puntos de aparición")]
-    public Transform puntoDianaIzquierda;
-    public Transform puntoDianaDerecha;
+    [Header("Spawn Points")]
+    public Transform leftSpawnPoint;
+    public Transform rightSpawnPoint;
 
     [Header("Prefab")]
-    public GameObject prefabDiana;
+    public GameObject targetPrefab;
 
-    [Header("Tiempos")]
-    public float tiempoCambio = 3f;
-    public float delayRespawn = 0.5f;
+    [Header("Timers")]
+    public float targetLifetime = 3f;
+    public float respawnDelay = 0.5f;
 
-    private GameObject dianaActual;
+    private GameObject currentTarget;
 
-    public void EmpezarDianas()
+    public void StartTargets()
     {
         StopAllCoroutines();
 
-        if (dianaActual != null)
+        if (currentTarget != null)
         {
-            Destroy(dianaActual);
+            Destroy(currentTarget);
         }
 
-        SpawnNuevaDiana();
+        SpawnNewTarget();
     }
 
-    public void DetenerDianas()
+    public void StopTargets()
     {
         StopAllCoroutines();
 
-        if (dianaActual != null)
+        if (currentTarget != null)
         {
-            Destroy(dianaActual);
+            Destroy(currentTarget);
         }
     }
 
-    void SpawnNuevaDiana()
+    void SpawnNewTarget()
     {
-        Transform puntoElegido;
+        Transform selectedSpawnPoint;
 
         if (Random.Range(0, 2) == 0)
         {
-            puntoElegido = puntoDianaIzquierda;
+            selectedSpawnPoint = leftSpawnPoint;
         }
         else
         {
-            puntoElegido = puntoDianaDerecha;
+            selectedSpawnPoint = rightSpawnPoint;
         }
 
-        dianaActual = Instantiate(
-            prefabDiana,
-            puntoElegido.position,
-            puntoElegido.rotation
+        currentTarget = Instantiate(
+            targetPrefab,
+            selectedSpawnPoint.position,
+            selectedSpawnPoint.rotation
         );
 
-        StartCoroutine(TemporizadorDiana());
+        StartCoroutine(TargetTimer());
     }
 
-    IEnumerator TemporizadorDiana()
+    IEnumerator TargetTimer()
     {
-        yield return new WaitForSeconds(tiempoCambio);
+        yield return new WaitForSeconds(targetLifetime);
 
-        if (dianaActual != null)
+        if (currentTarget != null)
         {
-            Destroy(dianaActual);
+            Destroy(currentTarget);
         }
 
-        yield return new WaitForSeconds(delayRespawn);
+        yield return new WaitForSeconds(respawnDelay);
 
-        SpawnNuevaDiana();
+        SpawnNewTarget();
     }
 
-    public void DianaGolpeada()
+    public void TargetHit()
     {
         StopAllCoroutines();
 
-        if (dianaActual != null)
+        if (currentTarget != null)
         {
-            Destroy(dianaActual);
+            Destroy(currentTarget);
         }
 
-        StartCoroutine(RespawnDiana());
+        StartCoroutine(RespawnTarget());
     }
 
-    IEnumerator RespawnDiana()
+    IEnumerator RespawnTarget()
     {
-        yield return new WaitForSeconds(delayRespawn);
+        yield return new WaitForSeconds(respawnDelay);
 
-        SpawnNuevaDiana();
+        SpawnNewTarget();
     }
 }
